@@ -2,30 +2,513 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Académie d'aviation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aviation Academy V2</title>
 
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
 body{
-    font-family:Arial,sans-serif;
+    display:flex;
+    min-height:100vh;
     background:#0b1220;
     color:white;
-    text-align:center;
-    padding:50px;
 }
 
-h1{
+/* SIDEBAR */
+
+.sidebar{
+    width:260px;
+    background:#111b2e;
+    padding:20px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
     color:#00d4ff;
+    margin-bottom:25px;
 }
-</style>
 
+.sidebar button{
+    width:100%;
+    border:none;
+    background:#1a2944;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+    cursor:pointer;
+}
+
+.sidebar button:hover{
+    background:#243550;
+}
+
+/* CONTENU */
+
+.content{
+    flex:1;
+    padding:30px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.card{
+    background:#182336;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.progress{
+    background:#101722;
+    height:20px;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(
+    90deg,
+    #00d4ff,
+    #00ff88
+    );
+}
+
+.answer{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    text-align:left;
+}
+
+.success{
+    color:#00ff88;
+}
+
+.error{
+    color:#ff6b6b;
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>✈ Académie d'aviation</h1>
+<div class="sidebar">
 
-<p>
-Mon premier site est en ligne !
-</p>
+    <div class="logo">
+        ✈ Aviation Academy
+    </div>
+
+    <button onclick="showPage('home')">
+        🏠 Dashboard
+    </button>
+
+    <button onclick="showPage('python')">
+        🐍 Python
+    </button>
+
+    <button onclick="showPage('aviation')">
+        ✈ Aviation
+    </button>
+
+    <button onclick="showPage('defense')">
+        🛡 Défense
+    </button>
+
+    <button onclick="showPage('quiz')">
+        📝 Quiz
+    </button>
+
+    <button onclick="showPage('badges')">
+        🏆 Badges
+    </button>
+
+</div>
+
+<div class="content">
+
+    <!-- DASHBOARD -->
+
+    <div id="home" class="page active">
+
+        <div class="card">
+            <h1>Tableau de bord</h1>
+
+            <p>
+                Niveau :
+                <span id="level">1</span>
+            </p>
+
+            <p>
+                XP :
+                <span id="xp">0</span>
+            </p>
+
+            <p>
+                Grade :
+                <span id="grade">
+                    Cadet
+                </span>
+            </p>
+
+            <div class="progress">
+                <div
+                id="progressBar"
+                class="progress-fill">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PYTHON -->
+
+    <div id="python" class="page">
+
+        <div class="card">
+
+            <h1>🐍 Python</h1>
+
+            <h2>Variables</h2>
+
+            <pre>
+nom = "Colin"
+age = 25
+
+print(nom)
+            </pre>
+
+            <br>
+
+            <button onclick="gainXP(20)">
+                ✅ Module terminé
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- AVIATION -->
+
+    <div id="aviation" class="page">
+
+        <div class="card">
+
+            <h1>✈ ADS-B</h1>
+
+            <p>
+            ADS-B signifie :
+            Automatic Dependent
+            Surveillance Broadcast.
+            </p>
+
+            <br>
+
+            <ul>
+                <li>Position</li>
+                <li>Altitude</li>
+                <li>Vitesse</li>
+                <li>Cap</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- DEFENSE -->
+
+    <div id="defense" class="page">
+
+        <div class="card">
+
+            <h1>🛡 Link 16</h1>
+
+            <p>
+
+            Réseau tactique utilisé pour
+            échanger des données entre :
+
+            </p>
+
+            <ul>
+                <li>Rafale</li>
+                <li>AWACS</li>
+                <li>Navires</li>
+                <li>Centres C2</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- QUIZ -->
+
+    <div id="quiz" class="page">
+
+        <div class="card">
+
+            <h1>Quiz</h1>
+
+            <h2 id="question"></h2>
+
+            <div id="answers"></div>
+
+            <div
+            id="result"
+            style="margin-top:15px;">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- BADGES -->
+
+    <div id="badges" class="page">
+
+        <div class="card">
+
+            <h1>🏆 Badges</h1>
+
+            <ul id="badgeList">
+                <li>🥉 Cadet</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+let xp =
+Number(
+localStorage.getItem("xp")
+) || 0;
+
+const quizzes = [
+
+{
+question:"Que fait print() ?",
+answers:[
+"Affiche",
+"Supprime",
+"Boucle"
+],
+correct:0
+},
+
+{
+question:"Que signifie ADS-B ?",
+answers:[
+"Automatic Dependent Surveillance Broadcast",
+"Air Defense System Base",
+"Aircraft Data Server"
+],
+correct:0
+},
+
+{
+question:"Link 16 est :",
+answers:[
+"Un radar",
+"Un moteur",
+"Un réseau tactique"
+],
+correct:2
+}
+
+];
+
+function showPage(page){
+
+document
+.querySelectorAll(".page")
+.forEach(
+p=>p.classList.remove("active")
+);
+
+document
+.getElementById(page)
+.classList.add("active");
+
+}
+
+function gainXP(amount){
+
+xp += amount;
+
+updateProfile();
+
+}
+
+function updateProfile(){
+
+let level =
+Math.floor(xp/100)+1;
+
+document
+.getElementById("xp")
+.innerText = xp;
+
+document
+.getElementById("level")
+.innerText = level;
+
+document
+.getElementById("progressBar")
+.style.width =
+(xp % 100) + "%";
+
+let grade = "Cadet";
+
+if(level>=3)
+grade="Opérateur";
+
+if(level>=5)
+grade="Analyste";
+
+if(level>=8)
+grade="Ingénieur";
+
+document
+.getElementById("grade")
+.innerText = grade;
+
+localStorage
+.setItem("xp",xp);
+
+updateBadges(level);
+
+}
+
+function updateBadges(level){
+
+let badges = [
+"🥉 Cadet"
+];
+
+if(level>=3)
+badges.push(
+"🥈 Opérateur"
+);
+
+if(level>=5)
+badges.push(
+"🥇 Analyste"
+);
+
+let html="";
+
+badges.forEach(function(b){
+html += "<li>"+b+"</li>";
+});
+
+document
+.getElementById("badgeList")
+.innerHTML = html;
+
+}
+
+let currentQuiz;
+
+function loadQuiz(){
+
+currentQuiz =
+quizzes[
+Math.floor(
+Math.random()
+*
+quizzes.length
+)
+];
+
+document
+.getElementById("question")
+.innerText =
+currentQuiz.question;
+
+let html="";
+
+currentQuiz.answers
+.forEach(function(
+answer,
+index
+){
+
+html +=
+"<button class='answer' onclick='checkAnswer("+
+index+
+")'>"+
+answer+
+"</button>";
+
+});
+
+document
+.getElementById("answers")
+.innerHTML =
+html;
+
+}
+
+function checkAnswer(index){
+
+if(index===
+currentQuiz.correct){
+
+document
+.getElementById("result")
+.innerHTML =
+"<span class='success'>✅ Bonne réponse (+10 XP)</span>";
+
+xp += 10;
+
+updateProfile();
+
+}else{
+
+document
+.getElementById("result")
+.innerHTML =
+"<span class='error'>❌ Mauvaise réponse</span>";
+
+}
+
+setTimeout(
+loadQuiz,
+1500
+);
+
+}
+
+updateProfile();
+loadQuiz();
+
+</script>
 
 </body>
 </html>
