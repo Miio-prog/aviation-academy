@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aviation Academy V2</title>
+<title>Aviation Academy</title>
 
 <style>
 
@@ -11,47 +11,44 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    font-family:Segoe UI,sans-serif;
 }
 
 body{
     display:flex;
     min-height:100vh;
-    background:#0b1220;
+    background:#08111f;
     color:white;
 }
 
-/* SIDEBAR */
-
 .sidebar{
-    width:260px;
-    background:#111b2e;
+    width:250px;
+    background:#101c33;
     padding:20px;
 }
 
 .logo{
-    font-size:24px;
+    font-size:30px;
     font-weight:bold;
     color:#00d4ff;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
 .sidebar button{
     width:100%;
-    border:none;
-    background:#1a2944;
-    color:white;
-    padding:12px;
-    border-radius:10px;
     margin-bottom:10px;
+    padding:12px;
+    border:none;
     cursor:pointer;
+    border-radius:10px;
+    background:#1b2c4d;
+    color:white;
+    font-size:16px;
 }
 
 .sidebar button:hover{
-    background:#243550;
+    background:#29426f;
 }
-
-/* CONTENU */
 
 .content{
     flex:1;
@@ -67,18 +64,18 @@ body{
 }
 
 .card{
-    background:#182336;
+    background:#15233d;
     padding:20px;
     border-radius:15px;
     margin-bottom:20px;
 }
 
 .progress{
-    background:#101722;
     height:20px;
+    background:#0d1729;
     border-radius:20px;
     overflow:hidden;
-    margin-top:15px;
+    margin-top:10px;
 }
 
 .progress-fill{
@@ -91,6 +88,14 @@ body{
     );
 }
 
+button.course{
+    margin-top:10px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
 .answer{
     width:100%;
     padding:12px;
@@ -98,15 +103,14 @@ body{
     border:none;
     border-radius:8px;
     cursor:pointer;
-    text-align:left;
 }
 
-.success{
-    color:#00ff88;
-}
-
-.error{
-    color:#ff6b6b;
+pre{
+    background:#0d1729;
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+    overflow:auto;
 }
 
 </style>
@@ -116,198 +120,288 @@ body{
 
 <div class="sidebar">
 
-    <div class="logo">
-        ✈ Aviation Academy
-    </div>
+<div class="logo">
+✈ Aviation Academy
+</div>
 
-    <button onclick="showPage('home')">
-        🏠 Dashboard
-    </button>
+<button onclick="showPage('home')">
+🏠 Dashboard
+</button>
 
-    <button onclick="showPage('python')">
-        🐍 Python
-    </button>
+<button onclick="showPage('python')">
+🐍 Python
+</button>
 
-    <button onclick="showPage('aviation')">
-        ✈ Aviation
-    </button>
+<button onclick="showPage('aviation')">
+✈ Aviation
+</button>
 
-    <button onclick="showPage('defense')">
-        🛡 Défense
-    </button>
+<button onclick="showPage('defense')">
+🛡 Défense
+</button>
 
-    <button onclick="showPage('quiz')">
-        📝 Quiz
-    </button>
+<button onclick="showPage('quiz')">
+📝 Quiz
+</button>
 
-    <button onclick="showPage('badges')">
-        🏆 Badges
-    </button>
+<button onclick="showPage('badges')">
+🏆 Badges
+</button>
 
 </div>
 
 <div class="content">
 
-    <!-- DASHBOARD -->
+<!-- DASHBOARD -->
 
-    <div id="home" class="page active">
+<div id="home" class="page active">
 
-        <div class="card">
-            <h1>Tableau de bord</h1>
+<div class="card">
 
-            <p>
-                Niveau :
-                <span id="level">1</span>
-            </p>
+<h1>Tableau de bord</h1>
 
-            <p>
-                XP :
-                <span id="xp">0</span>
-            </p>
+<p>
+Niveau :
+<span id="level">1</span>
+</p>
 
-            <p>
-                Grade :
-                <span id="grade">
-                    Cadet
-                </span>
-            </p>
+<p>
+XP :
+<span id="xp">0</span>
+</p>
 
-            <div class="progress">
-                <div
-                id="progressBar"
-                class="progress-fill">
-                </div>
-            </div>
+<p>
+Grade :
+<span id="grade">
+Cadet
+</span>
+</p>
 
-        </div>
+<div class="progress">
+<div
+id="progressBar"
+class="progress-fill">
+</div>
+</div>
 
-    </div>
+</div>
 
-    <!-- PYTHON -->
+<div class="card">
 
-    <div id="python" class="page">
+<h2>Objectif</h2>
 
-        <div class="card">
+<p>
+Terminer des cours et réussir des quiz
+pour monter de niveau.
+</p>
 
-            <h1>🐍 Python</h1>
+</div>
 
-            <h2>Variables</h2>
+</div>
 
-            <pre>
+<!-- PYTHON -->
+
+<div id="python" class="page">
+
+<div class="card">
+
+<h1>🐍 Variables</h1>
+
+<p>
+Une variable stocke une donnée.
+</p>
+
+<pre>
 nom = "Colin"
 age = 25
 
 print(nom)
-            </pre>
+</pre>
 
-            <br>
+<button
+class="course"
+onclick="gainXP(10)">
+✅ Valider le cours
+</button>
 
-            <button onclick="gainXP(20)">
-                ✅ Module terminé
-            </button>
+</div>
 
-        </div>
+<div class="card">
 
-    </div>
+<h1>🐍 Conditions</h1>
 
-    <!-- AVIATION -->
+<pre>
+age = 18
 
-    <div id="aviation" class="page">
+if age >= 18:
+    print("Majeur")
+</pre>
 
-        <div class="card">
+<button
+class="course"
+onclick="gainXP(10)">
+✅ Valider le cours
+</button>
 
-            <h1>✈ ADS-B</h1>
+</div>
 
-            <p>
-            ADS-B signifie :
-            Automatic Dependent
-            Surveillance Broadcast.
-            </p>
+<div class="card">
 
-            <br>
+<h1>🐍 Boucles</h1>
 
-            <ul>
-                <li>Position</li>
-                <li>Altitude</li>
-                <li>Vitesse</li>
-                <li>Cap</li>
-            </ul>
+<pre>
+for i in range(5):
+    print(i)
+</pre>
 
-        </div>
+<button
+class="course"
+onclick="gainXP(10)">
+✅ Valider le cours
+</button>
 
-    </div>
+</div>
 
-    <!-- DEFENSE -->
+</div>
 
-    <div id="defense" class="page">
+<!-- AVIATION -->
 
-        <div class="card">
+<div id="aviation" class="page">
 
-            <h1>🛡 Link 16</h1>
+<div class="card">
 
-            <p>
+<h1>✈ Les 4 forces du vol</h1>
 
-            Réseau tactique utilisé pour
-            échanger des données entre :
+<ul>
+<li>Portance</li>
+<li>Traînée</li>
+<li>Poussée</li>
+<li>Poids</li>
+</ul>
 
-            </p>
+<button
+class="course"
+onclick="gainXP(10)">
+✅ Valider le cours
+</button>
 
-            <ul>
-                <li>Rafale</li>
-                <li>AWACS</li>
-                <li>Navires</li>
-                <li>Centres C2</li>
-            </ul>
+</div>
 
-        </div>
+<div class="card">
 
-    </div>
+<h1>📡 ADS-B</h1>
 
-    <!-- QUIZ -->
+<p>
+ADS-B signifie
+Automatic Dependent Surveillance Broadcast.
+</p>
 
-    <div id="quiz" class="page">
+<p>
+Il transmet :
+</p>
 
-        <div class="card">
+<ul>
+<li>Position</li>
+<li>Altitude</li>
+<li>Vitesse</li>
+<li>Cap</li>
+</ul>
 
-            <h1>Quiz</h1>
+<button
+class="course"
+onclick="gainXP(10)">
+✅ Valider le cours
+</button>
 
-            <h2 id="question"></h2>
+</div>
 
-            <div id="answers"></div>
+</div>
 
-            <div
-            id="result"
-            style="margin-top:15px;">
-            </div>
+<!-- DEFENSE -->
 
-        </div>
+<div id="defense" class="page">
 
-    </div>
+<div class="card">
 
-    <!-- BADGES -->
+<h1>🛡 Link 16</h1>
 
-    <div id="badges" class="page">
+<p>
+Link 16 est un réseau tactique militaire
+permettant l'échange de données.
+</p>
 
-        <div class="card">
+<button
+class="course"
+onclick="gainXP(15)">
+✅ Valider le cours
+</button>
 
-            <h1>🏆 Badges</h1>
+</div>
 
-            <ul id="badgeList">
-                <li>🥉 Cadet</li>
-            </ul>
+<div class="card">
 
-        </div>
+<h1>🛡 C4ISR</h1>
 
-    </div>
+<p>
+Command, Control, Communications,
+Computers, Intelligence,
+Surveillance and Reconnaissance.
+</p>
+
+<button
+class="course"
+onclick="gainXP(15)">
+✅ Valider le cours
+</button>
+
+</div>
+
+</div>
+
+<!-- QUIZ -->
+
+<div id="quiz" class="page">
+
+<div class="card">
+
+<h1>Quiz</h1>
+
+<h2 id="question"></h2>
+
+<div id="answers"></div>
+
+<div
+id="result"
+style="margin-top:15px;">
+</div>
+
+</div>
+
+</div>
+
+<!-- BADGES -->
+
+<div id="badges" class="page">
+
+<div class="card">
+
+<h1>🏆 Badges</h1>
+
+<ul id="badgeList">
+<li>🥉 Cadet</li>
+</ul>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
 
 let xp =
-Number(
-localStorage.getItem("xp")
-) || 0;
+Number(localStorage.getItem("xp"))
+|| 0;
 
 const quizzes = [
 
@@ -322,7 +416,7 @@ correct:0
 },
 
 {
-question:"Que signifie ADS-B ?",
+question:"ADS-B signifie ?",
 answers:[
 "Automatic Dependent Surveillance Broadcast",
 "Air Defense System Base",
@@ -334,11 +428,11 @@ correct:0
 {
 question:"Link 16 est :",
 answers:[
-"Un radar",
 "Un moteur",
-"Un réseau tactique"
+"Un réseau tactique",
+"Un radar"
 ],
-correct:2
+correct:1
 }
 
 ];
@@ -347,9 +441,9 @@ function showPage(page){
 
 document
 .querySelectorAll(".page")
-.forEach(
-p=>p.classList.remove("active")
-);
+.forEach(function(p){
+p.classList.remove("active");
+});
 
 document
 .getElementById(page)
@@ -362,6 +456,10 @@ function gainXP(amount){
 xp += amount;
 
 updateProfile();
+
+localStorage.setItem("xp",xp);
+
+alert("+" + amount + " XP gagnés");
 
 }
 
@@ -385,21 +483,18 @@ document
 
 let grade = "Cadet";
 
-if(level>=3)
-grade="Opérateur";
+if(level >= 3)
+grade = "Opérateur";
 
-if(level>=5)
-grade="Analyste";
+if(level >= 5)
+grade = "Analyste";
 
-if(level>=8)
-grade="Ingénieur";
+if(level >= 8)
+grade = "Ingénieur";
 
 document
 .getElementById("grade")
 .innerText = grade;
-
-localStorage
-.setItem("xp",xp);
 
 updateBadges(level);
 
@@ -411,17 +506,19 @@ let badges = [
 "🥉 Cadet"
 ];
 
-if(level>=3)
-badges.push(
-"🥈 Opérateur"
-);
+if(level >= 3){
+badges.push("🥈 Opérateur");
+}
 
-if(level>=5)
-badges.push(
-"🥇 Analyste"
-);
+if(level >= 5){
+badges.push("🥇 Analyste");
+}
 
-let html="";
+if(level >= 8){
+badges.push("✈ Ingénieur");
+}
+
+let html = "";
 
 badges.forEach(function(b){
 html += "<li>"+b+"</li>";
@@ -440,8 +537,7 @@ function loadQuiz(){
 currentQuiz =
 quizzes[
 Math.floor(
-Math.random()
-*
+Math.random() *
 quizzes.length
 )
 ];
@@ -451,13 +547,10 @@ document
 .innerText =
 currentQuiz.question;
 
-let html="";
+let html = "";
 
-currentQuiz.answers
-.forEach(function(
-answer,
-index
-){
+currentQuiz.answers.forEach(
+function(answer,index){
 
 html +=
 "<button class='answer' onclick='checkAnswer("+
@@ -470,31 +563,29 @@ answer+
 
 document
 .getElementById("answers")
-.innerHTML =
-html;
+.innerHTML = html;
 
 }
 
 function checkAnswer(index){
 
-if(index===
-currentQuiz.correct){
-
-document
-.getElementById("result")
-.innerHTML =
-"<span class='success'>✅ Bonne réponse (+10 XP)</span>";
+if(index === currentQuiz.correct){
 
 xp += 10;
 
 updateProfile();
+
+document
+.getElementById("result")
+.innerHTML =
+"✅ Bonne réponse (+10 XP)";
 
 }else{
 
 document
 .getElementById("result")
 .innerHTML =
-"<span class='error'>❌ Mauvaise réponse</span>";
+"❌ Mauvaise réponse";
 
 }
 
